@@ -15,6 +15,7 @@
                                 <img src="/image/{{$stock->imgpath}}" alt="" class="incart" >
                                 <br>
                                 {{$stock->detail}} <br>
+                                在庫: {{$stock->inventory}} <br>
                                 <form action="mycart" method="post">
                                     @csrf
                                     <input type="hidden" name="stock_id" value="{{ $stock->id }}">
@@ -26,7 +27,7 @@
                     @endforeach
                </div>
                <div class="text-center" style="width: 200px;margin: 20px auto;">
-               {{  $stocks->links()}} 
+               {{  $stocks->links()}}
                </div>
            </div>
        </div>

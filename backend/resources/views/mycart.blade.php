@@ -35,6 +35,9 @@
                     </div>
                     <form action="/checkout" method="POST">
                         @csrf
+                        @foreach($my_carts as $my_cart)
+                          <input type="hidden" name="stock_id[]" value="{{ $my_cart->stock->id }}">
+                        @endforeach
                         <button type="submit" class="btn btn-danger btn-lg text-center buy-btn" >購入する</button>
                     </form>
                 <a href="/">商品一覧へ</a>

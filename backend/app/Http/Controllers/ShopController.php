@@ -33,17 +33,20 @@ class ShopController extends Controller
 
     public function deleteCart(Request $request,Cart $cart)
     {
-       $stock_id=$request->stock_id;
+       $stock_id = $request->stock_id;
        $message = $cart->deleteCart($stock_id);
        $data = $cart->showCart();
        return view('mycart',$data)->with('message',$message);
     }
 
-    public function checkout(Cart $cart)
+    public function checkout(Request $request,Cart $cart,Stock $stock)
     {
         $user = Auth::user();
-        $mail_data['user']=$user->name;
-        $mail_data['checkout_items']=$cart->checkoutCart();
+        $stock_id = $request->stock_id;
+        $mail_data['user'] = $user->name;
+        $mail_data['checkout_items'] = $cart->checkoutCart();
+        $stock->inventoryUpdate($stock_id);
+
         Mail::to($user->email)->send(new Thanks($mail_data));
         return view('checkout');
     }

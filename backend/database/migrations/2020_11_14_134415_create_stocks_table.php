@@ -19,6 +19,7 @@ class CreateStocksTable extends Migration
             $table->string('detail','500');
             $table->integer('fee');
             $table->string('imgpath','200');
+            $table->smallInteger('inventory');
             $table->timestamps();
         });
     }
