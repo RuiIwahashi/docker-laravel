@@ -23,6 +23,10 @@ Route::group(['middleware' => ['auth']], function () {
 
 });
 
+Route::get('/{any}', function(){
+  return view('App');
+})->where('any', '.*');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
