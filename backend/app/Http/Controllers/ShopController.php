@@ -17,6 +17,12 @@ class ShopController extends Controller
         return view('shop',compact('stocks'));
     }
 
+    public function search(Request $request,Stock $stock)
+    {
+        $stocks = $stock->serchValue($request->search);
+        return view('shop',compact('stocks'));
+    }
+
     public function myCart(Cart $cart)
     {
         $data = $cart->showCart();
