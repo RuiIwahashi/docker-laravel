@@ -14,13 +14,16 @@ class ShopController extends Controller
     public function index()
     {
         $stocks = Stock::Paginate(6);
-        return view('shop',compact('stocks'));
+        $count  = Stock::count();
+        return view('shop',compact('stocks', 'count'));
     }
 
     public function search(Request $request,Stock $stock)
     {
         $stocks = $stock->serchValue($request->search);
-        return view('shop',compact('stocks'));
+        $count  = $stocks->count();
+        $stocks = $stocks->Paginate(6);
+        return view('shop',compact('stocks', 'count'));
     }
 
     public function myCart(Cart $cart)

@@ -13,9 +13,9 @@ class Stock extends Model
     public function serchValue($value)
     {
         if(!empty($value)) {
-            return $this->where('name', 'like', '%'.$value.'%')->Paginate(6);
+            return $this->where('name', 'like', '%'.$value.'%');
         }
-        return $this->Paginate(6);
+        return $this;
     }
 
     public function inventoryUpdate($stock_id)
