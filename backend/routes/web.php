@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'ShopController@index');
 Route::get('/search', 'ShopController@search');
+Route::get('/sort', 'ShopController@sort');
 
 Route::group(['middleware' => ['auth']], function () {
 

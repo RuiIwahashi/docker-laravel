@@ -9,7 +9,16 @@
            <input type="text" name="search" value="">
            <input type="submit" value="検索">
        </form>
-           <h1 style="color:#555555; text-align:center; font-size:1.2em; padding:24px 0px; font-weight:bold;">商品一覧</h1>
+       <form action="sort" method="get" id="sort_form">
+           <select name="sort_id" onchange="submit(this.form)">
+               <option value="" hidden>Choose</option>
+               @foreach($sort_lists as $sort_list)
+                   <option value="{{$sort_list->id}}">{{$sort_list->name}}</option>
+               @endforeach
+           </select>
+           <input type="submit" value="sort" style="display:none;">
+       </form>
+       <h1 style="color:#555555; text-align:center; font-size:1.2em; padding:24px 0px; font-weight:bold;">商品一覧</h1>
            <div class="">
                表示件数{{ $count ?? '' }}
                <div class="d-flex flex-row flex-wrap">

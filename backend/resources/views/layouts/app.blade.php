@@ -18,6 +18,15 @@
 
    <!-- Styles -->
    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+   <script type="text/javascript">
+   $(function(){
+     $("#sort_id").change(function(){
+       $("#sort_form").submit();
+     });
+   });
+   </script>
+
 </head>
 <body>
    <div id="app">

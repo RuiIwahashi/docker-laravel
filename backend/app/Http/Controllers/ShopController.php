@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Stock;
+use App\Models\Sort;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Mail;
@@ -13,9 +14,10 @@ class ShopController extends Controller
 {
     public function index()
     {
-        $stocks = Stock::Paginate(6);
-        $count  = Stock::count();
-        return view('shop',compact('stocks', 'count'));
+        $stocks     = Stock::Paginate(6);
+        $count      = Stock::count();
+        $sort_lists = Sort::all();
+        return view('shop',compact('stocks', 'count', 'sort_lists'));
     }
 
     public function search(Request $request,Stock $stock)
@@ -24,6 +26,26 @@ class ShopController extends Controller
         $count  = $stocks->count();
         $stocks = $stocks->Paginate(6);
         return view('shop',compact('stocks', 'count'));
+    }
+
+    public function sort(Request $request,Stock $stock)
+    {
+        $sort_id = $request->sort_id;
+        $sort_lists = Sort::all();
+
+        if ($sort_id === '') {
+            $stocks = $stock->paginate(6);
+            return view('shop',compact('stocks', 'sort_lists'));
+        } elseif ($sort_id === '1') {
+            $stocks = $stock->orderBy('fee','desc')->paginate(6);
+            return view('shop',compact('stocks', 'sort_lists'));
+        } elseif ($sort_id === '2') {
+            $stocks = $stock->orderBy('fee','asc')->paginate(6);
+            return view('shop',compact('stocks', 'sort_lists'));
+        } elseif ($sort_id === '3') {
+            $stocks = $stock->orderBy('created_at','desc')->paginate(6);
+            return view('shop',compact('stocks', 'sort_lists'));
+        }
     }
 
     public function myCart(Cart $cart)
@@ -59,5 +81,6 @@ class ShopController extends Controller
         Mail::to($user->email)->send(new Thanks($mail_data));
         return view('checkout');
     }
+
 
 }
