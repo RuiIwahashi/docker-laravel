@@ -11,7 +11,7 @@
        </form>
        <form action="sort" method="get" id="sort_form">
            <select name="sort_id" onchange="submit(this.form)">
-               <option value="" hidden>Choose</option>
+               <option value="" hidden>並び替え</option>
                @foreach($sort_lists as $sort_list)
                    <option value="{{$sort_list->id}}">{{$sort_list->name}}</option>
                @endforeach
@@ -42,7 +42,7 @@
                     @endforeach
                </div>
                <div class="text-center" style="width: 200px;margin: 20px auto;">
-               {{  $stocks->links()}}
+               {{ $stocks->appends(request()->input())->links() }}
                </div>
            </div>
        </div>

@@ -35,10 +35,12 @@ class ShopController extends Controller
 
         if ($sort_id === '') {
             $stocks = $stock->paginate(6);
-            return view('shop',compact('stocks', 'sort_lists'));
+            $count  = $stocks->count();
+            return view('shop',compact('stocks', 'count', 'sort_lists'));
         } elseif ($sort_id === '1') {
             $stocks = $stock->orderBy('fee','desc')->paginate(6);
-            return view('shop',compact('stocks', 'sort_lists'));
+            $count  = $stocks->count();
+            return view('shop',compact('stocks', 'count', 'sort_lists'));
         } elseif ($sort_id === '2') {
             $stocks = $stock->orderBy('fee','asc')->paginate(6);
             return view('shop',compact('stocks', 'sort_lists'));
